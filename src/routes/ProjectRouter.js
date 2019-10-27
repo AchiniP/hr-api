@@ -47,7 +47,7 @@ projectRouter.get("/:id", service.getProjectById, (req, res) => {
 });
 
 // Updating Project By Id
-projectRouter.patch(
+projectRouter.put(
   "/:id",
   service.updateProjectCompletion,
   async (req, res) => {

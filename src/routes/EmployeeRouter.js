@@ -62,7 +62,7 @@ employeeRouter.get("/:id", service.getEmployeeById, (req, res) => {
 });
 
 // Updating Employee By Id
-employeeRouter.patch("/:id", service.getEmployeeById, async (req, res) => {
+employeeRouter.put("/:id", service.getEmployeeById, async (req, res) => {
   const keyList = Object.keys(req.body);
   keyList.map(key => {
     if (req.body[key] != null) {

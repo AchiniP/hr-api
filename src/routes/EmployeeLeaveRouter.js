@@ -47,7 +47,7 @@ EmployeeLeaveRouter.get("/:id", service.getLeaveById, (req, res) => {
 });
 
 // Updating leave By Id
-EmployeeLeaveRouter.patch("/:id", service.getLeaveById, async (req, res) => {
+EmployeeLeaveRouter.put("/:id", service.getLeaveById, async (req, res) => {
   const keyList = Object.keys(req.body);
   keyList.map(key => {
     if (req.body[key] != null) {
@@ -66,7 +66,7 @@ EmployeeLeaveRouter.patch("/:id", service.getLeaveById, async (req, res) => {
 EmployeeLeaveRouter.delete("/:id", service.getLeaveById, async (req, res) => {
   try {
     await res.leave.remove();
-    res.json({ message: "Deleted The Project" });
+    res.json({ employeeId: res.leave.employeeId });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
