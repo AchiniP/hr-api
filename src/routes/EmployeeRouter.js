@@ -1,4 +1,5 @@
 const express = require("express");
+const _ = require('lodash');
 const Employee = require("../models/Employee");
 const service = require("../services/UtilService");
 
@@ -8,6 +9,7 @@ const employeeRouter = express.Router();
 employeeRouter.get("/", async (req, res) => {
   try {
     const employees = await Employee.find();
+    const updatedEmployees = employees.map(employee => _.set(employee, 'id', employee._id));
     res.json(employees);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -27,7 +29,8 @@ employeeRouter.post("/", async (req, res) => {
     skills,
     email,
     role,
-    manager
+    manager,
+    password,
   } = req.body;
   const employee = new Employee({
     firstName,
@@ -40,7 +43,8 @@ employeeRouter.post("/", async (req, res) => {
     skills,
     email,
     role,
-    manager
+    manager,
+    password
   });
 
   try {
@@ -53,7 +57,8 @@ employeeRouter.post("/", async (req, res) => {
 
 // Get employee by Id
 employeeRouter.get("/:id", service.getEmployeeById, (req, res) => {
-  res.json(res.employee);
+  const updatedEmployee =  _.set(res.employee, 'id', res.employee._id);  
+  res.json(updatedEmployee);
 });
 
 // Updating Employee By Id

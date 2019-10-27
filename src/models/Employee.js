@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const employeeSchema = new mongoose.Schema({
-  empId: {
+  id: {
     type: String
   },
   firstName: {
@@ -44,6 +44,10 @@ const employeeSchema = new mongoose.Schema({
     default: Date.now
   },
   email: {
+    type: String,
+    required: true
+  },
+  password: {
     type: String,
     required: true
   },
