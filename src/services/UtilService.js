@@ -133,7 +133,10 @@ async function updateProjectCompletion(req, res, next) {
     const endDate = project.endDate;
     const actualCompletion = req.body.actualCompletionDate;
 
-    if (actualCompletion) {
+    console.log(actualCompletion);
+    console.log(project.actualCompletionDate);
+    console.log(actualCompletion && !project.actualCompletionDate);
+    if (actualCompletion && !project.actualCompletionDate) {
       const timeDiffDays = Math.ceil(
         (new Date(endDate) - new Date(actualCompletion)) / Const.MILLIS_PER_DAY
       );
